@@ -375,6 +375,8 @@ class 是分类1,2,3,4,,,,
     gender: "女",
     avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
     video: "http://wsim.66boss.com/avatar/20170.mp4"
+    width:1024
+    height:768
     filemd5:"3ea31ba3efg1331a398"
     distance: 1000 距离你距离
    },
@@ -384,6 +386,8 @@ class 是分类1,2,3,4,,,,
     gender: "女",
     avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
     video: "http://wsim.66boss.com/avatar/20170.mp4"
+    width:1024
+    height:768
     filemd5:"3ea31ba3efg1331a398"
     distance: 1000 距离你距离
     },
@@ -553,7 +557,8 @@ name:
 gender:
 avatar:
 video:
-number:
+    width:1024
+    height:768
 }
 videogid = 1 自加
 
