@@ -376,7 +376,7 @@ class 是分类
     avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
     video: "http://wsim.66boss.com/avatar/20170.mp4"
     filemd5:"3ea31ba3efg1331a398"
-    geo: "102.23-33.0"
+    distance: 1000 距离你距离
     class: 2
    },
    {,
@@ -386,7 +386,7 @@ class 是分类
     avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
     video: "http://wsim.66boss.com/avatar/20170.mp4"
     filemd5:"3ea31ba3efg1331a398"
-    geo: "102.23-33.0"
+    distance: 1000 距离你距离
     class: 2
     },
 
