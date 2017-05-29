@@ -362,7 +362,7 @@ hash 是签名
 
 
 #19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=2
-class 是分类
+class 是分类1,2,3,4,,,,
 
 ```
 {
@@ -377,7 +377,6 @@ class 是分类
     video: "http://wsim.66boss.com/avatar/20170.mp4"
     filemd5:"3ea31ba3efg1331a398"
     distance: 1000 距离你距离
-    class: 2
    },
    {,
     name: "CHU",
@@ -387,7 +386,6 @@ class 是分类
     video: "http://wsim.66boss.com/avatar/20170.mp4"
     filemd5:"3ea31ba3efg1331a398"
     distance: 1000 距离你距离
-    class: 2
     },
 
     ]
