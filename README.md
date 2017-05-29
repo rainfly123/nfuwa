@@ -552,13 +552,13 @@ video_i
 
 video_1 {
 filemd5:
-class:1/2/3/4
 name:
 gender:
 avatar:
+userid:
 video:
-    width:1024
-    height:768
+width:1024
+height:768
 }
 videogid = 1 自加
 
