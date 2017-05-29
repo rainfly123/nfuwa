@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>排行榜</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	<link rel="icon" type="image/png" href="assets/i/favicon.png">	
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+	<link rel="stylesheet" href="assets/css/amazeui.min.css">
+	<link rel="stylesheet" href="assets/css/youxi_style.css">
+	<link rel="stylesheet" href="assets/css/rem_style.css">
+</head>
+
+<body>
+	<div class="am-page" id="">
+		<!--
+		<header data-am-widget="header" class="am-header am-header-default yx-header-bg am-header-fixed">
+			<div class="am-header-left am-header-nav">
+			</div>
+
+			<div class="am-header-right am-header-nav" style="display:none;">
+				<a href="#" class="">
+
+					<i class="am-header-icon"></i>
+				</a>
+			</div>
+		</header>
+		-->
+		<div class="yx-content yx-content-style">
+			<div class="yx-top-bg">
+				<div class="yx-top-ouser">
+					<img id="championimage" src="images/touxiang01.png" />
+				</div>
+				<div id="championname" class="yx-top-oname">
+					<span>Who</span>
+				</div>
+				<div class="xy-champion">
+					冠军
+				</div>
+			</div>
+
+			<div class="am-cf xy-top-myplace">
+				<!--
+				<div id="myselftop" class="xy-top-ranking">
+					18
+				</div>
+				<img id="myselfimage" src="images/touxiang01.png" class="xy-mess-face"/>
+				<div id="myselfname" class="xy-mess-name">
+					李彬彬
+				</div>
+				<div id="myselfnumber" class="xy-mess-nums">
+					共24个福娃
+				</div>
+				-->
+			</div>
+			
+			<div id="toplist" class="yx-top-list">
+				<ul id = "toplistu">
+				</ul>
+			</div>
+			
+			
+		</div>
+				 
+
+
+	</div>
+
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/rem.js"></script>
+<script type="text/javascript">
+
+function getUrlParam (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null)
+        return unescape(r[2]);
+    return null;
+}
+myuserid = getUrlParam("user");
+
+var URL = "http://wsimali.66boss.com:9090/api/toplist?user=";
+$.get(URL + myuserid, {}, function(data){
+            var response = eval('(' + data + ')');
+
+            var users = response['data'];
+            for (var i = 0; i < users.length; i++){
+                var user = users[i];
+				var otop = i+1;
+				var osnap = user['snap'];
+				var onick = user['nick'];
+				var onums = user['number'];
+				
+                if (myuserid == user['user']){
+					
+					myranking = "<div id='championimage' class='xy-top-ranking'>"+otop+"</div>"+
+								"<img id='myselfimage' src="+osnap+" class='xy-mess-face'/>"+
+								"<div id='myselfname' class='xy-mess-name'>"+onick+"</div>"+
+								"<div id='myselfnumber' class='xy-mess-nums'>"+"共"+onums+"个福娃"+"</div>";
+					 $(".xy-top-myplace").append(myranking);
+                }
+                if (i == 0) {
+					
+					theone = "<div class='yx-top-ouser'>"+
+								"<img id='championimage' src="+osnap+" />"+
+							 "</div>"+
+							"<div id='championname' class='yx-top-oname'>"+
+								"<span>"+onick+"</span>"+
+							"</div>"+
+							"<div class='xy-champion'>"+
+								"冠军"+
+							"</div>";
+							
+                   $(".yx-top-bg").append(theone);
+                }
+				
+				tlist = "";
+				tlist = "<li class='am-cf xy-top-listcont'>"+
+							"<div class='xy-top-ranking'>"+otop+"</div>"+
+							"<img src="+osnap+" class='xy-mess-face'/>"+
+							"<div class='xy-mess-name'>"+onick+"</div>"+
+							"<div class='xy-mess-nums'>"+"共"+onums+"个福娃"+"</div>"+
+						"</li>";
+				
+				$("#toplistu").append(tlist);
+				
+            }
+     })
+
+</script>
+</body>
+</html>

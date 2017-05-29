@@ -1,0 +1,21 @@
+video_c
+video_i
+先不管地理位置坐标
+
+
+video_1 {
+filemd5:
+class:1/2/3/4
+name:
+gender:
+avatar:
+video:
+number:
+}
+videogid = 1 自加
+
+有序集合
+　美食　video_1 video_8  播放次数
+　女装　video_2 video_3  播放次数
+　男装　video_3 video_4  播放次数
+　
