@@ -547,13 +547,13 @@ fuwa_i 是缘分福娃GEO地理位置信息
 fuwa_i 是寻宝福娃GEO地理位置信息
 
 ============个人笔记用，By Rain================
-video_1 美食
-video_2 女装 
-video_3 男装
-video_4 鞋帽
-video_5 玩乐
+video_g_1 美食
+video_g_2 女装 
+video_g_3 男装
+video_g_4 鞋帽
+video_g_5 玩乐
 寻宝视频地理位置坐标
-video_i 盟友视频地理位置坐标
+video_g_i 盟友视频地理位置坐标
 
 filemd5{
 name:

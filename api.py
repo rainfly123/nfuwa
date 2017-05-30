@@ -69,7 +69,7 @@ def getFileName():
     return "".join(temp)
 
 class Hidev2Handler(tornado.web.RequestHandler):
-    def myget(self, pic, video):
+    def myget(self, pic, video, filemd5):
         resp = dict()
         pos = self.get_argument("pos", strip=True)
         geohash = self.get_argument("geohash", strip=True)
@@ -77,6 +77,8 @@ class Hidev2Handler(tornado.web.RequestHandler):
         detail = self.get_argument("detail", strip=True)
         number = self.get_argument("number", strip=True)
         purpose = self.get_argument("type", default='1', strip=True)
+        classid = self.get_argument("class", default='c', strip=True)
+        videogeo = "video_g_" + classid
         geo = geohash.split('-')
         if len(geo) != 2 or len(number) < 1:
             resp['code'] =  1
@@ -93,6 +95,7 @@ class Hidev2Handler(tornado.web.RequestHandler):
     def post(self):
         pic = str()
         video = str()
+        filemd5 = str()
 
         file_metas = self.request.files['file']   
         for meta in file_metas:
@@ -110,14 +113,18 @@ class Hidev2Handler(tornado.web.RequestHandler):
                 with open(temppath, 'wb') as up:
                     up.write(meta['body'])
 
+                sign = hashlib.md5()
+                sign.update(meta['body'])
+                filemd5 = sign.hexdigest()
+
                 suffix = os.path.splitext(meta['filename'])[1]
-                filename = getFileName() + suffix
+                filename = filemd5 + suffix
                 filepath = os.path.join(STORE_PATH, filename)
 
                 os.rename(temppath, filepath)
                 video = ACCESS_PATH + filename
 
-        self.myget(pic, video)
+        self.myget(pic, video, filemd5)
 
 class QuerymyHandler(tornado.web.RequestHandler):
     def get(self):
