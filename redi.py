@@ -10,47 +10,6 @@ import random
 STORE_PATH="/www/html/fuwa/"
 pool = redis.ConnectionPool(host='127.0.0.1', port=6379, password="aaa11bbb22")  
 r = redis.Redis(connection_pool=pool)  
-#r.set('one', 'first')  
-#r.set('two', 'second')  
-#r.geoadd("guangdong", "113.2099647", "23.593675", "Qingyuan", 113.2278442, 23.1255978, "Guangzhou", 113.106308, 23.0088312, "Foshan")
-#print r.get('one')  
-#print r.get('two')  
-#print r.geopos('guangdong', 'Foshan')  
-
-def QueryFuwa(longtitude, latitude, radius):
-    fuwas = r.georadius("fuwa_c", longtitude, latitude, int(radius), unit="m", withdist=True)
-    results = list()
-    for fuwa in fuwas:
-        fuwaid, distance = fuwa[0], fuwa[1]
-        detail, pos, pic, idd = r.hmget(fuwaid, "detail", "pos", "pic", "id")
-        geohash = r.geopos("fuwa_c", fuwaid)
-        geo = "%f-%f"%(geohash[0][0], geohash[0][1])
-
-        name, avatar, gender, signature, location, video, owner = r.hmget(fuwaid, "name", "avatar", "gender", "signature", "location", "video", "owner")
-
-        result  = {"gid":fuwaid, "distance":distance, "pos":pos, "id":idd, "geo":geo, "pic":pic, "detail":detail,\
-                  "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
-                  "video":video, "hider": owner}
-        results.append(result)
-    return results
-
-def QueryStrFuwa(longtitude, latitude, radius):
-    fuwas = r.georadius("fuwa_i", longtitude, latitude, int(radius), unit="m", withdist=True)
-    results = list()
-    for fuwa in fuwas:
-        fuwaid, distance = fuwa[0], fuwa[1]
-        detail, pos, pic, idd = r.hmget(fuwaid, "detail", "pos", "pic", "id")
-        geohash = r.geopos("fuwa_i", fuwaid)
-        geo = "%f-%f"%(geohash[0][0], geohash[0][1])
-
-        name, avatar, gender, signature, location, video, owner = r.hmget(fuwaid, "name", "avatar", "gender", "signature", "location", "video", "owner")
-
-
-        result  = {"gid":fuwaid, "distance":distance, "pos":pos, "id":idd, "geo":geo, "pic":pic, "detail":detail,\
-                  "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location, \
-                  "video":video, "hider":owner}
-        results.append(result)
-    return results
 
 HOWFAR = 30 
 def QueryFuwaNew(longtitude, latitude, radius, biggest):
@@ -154,7 +113,6 @@ def QueryStrFuwaNew(longtitude, latitude, radius, biggest):
     return {"far":farfuwas, "near":nearfuwas}
 
 BASE = "https://api.66boss.com/ucenter/userinfo/info?user_id="
-
 def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, purpose):
 
     results = r.smembers(owner + "_apply")
@@ -188,12 +146,9 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
                 break
 
 def CaptureFuwa(pic, user, gid):
-    #fpic, fid, fromo = r.hmget(gid, "pic", "id", "owner")
     import os
     import imgcmp
 
-    #fid = r.hget(gid, "id")
-    #fromo = r.hget(gid, "owner")
     filename = os.path.basename(pic)
     fullpath = os.path.join(STORE_PATH, filename)
     clue = r.hget(gid, "pic") 
@@ -205,13 +160,7 @@ def CaptureFuwa(pic, user, gid):
 
     pipe = r.pipeline()
     pipe.hset(gid, "owner", user)
-    #pipe.hincrby(user + "_pack", fid, 1)
-    #pipe.hincrby(user + "_pack", fid, 1)
     pipe.sadd(user + "_pack", gid)
-   # pipe.srem(fromo + "_pack", gid)
-    #number = pipe.hget(fromo + "_pack", fid)
-    #if number == "0" :
-     #   pipe.hdel(fromo + "_pack", fid)
     if gid.find('c') > 0:
         pipe.zrem("fuwa_c", gid)
     else:
@@ -326,6 +275,12 @@ def Huodong(gid):
     else:
         detail = ""
     return detail
+
+aclass =[{"name":"美食", "enum":1}, {"name":"女装", "enum":2}, {"name":"男装", "enum":3},\
+        {"name":"鞋帽", "enum":4}, {"name":"玩乐", "enum":5}]
+def Class():
+    return aclass
+
 
 #print QueryMyApply("100000076")
 #print QueryMy("100000320")

@@ -547,11 +547,9 @@ fuwa_i 是寻宝福娃GEO地理位置信息
 ============个人笔记用，By Rain================
 video_c
 video_i
-先不管地理位置坐标
+地理位置坐标
 
-
-video_1 {
-filemd5:
+filemd5{
 name:
 gender:
 avatar:
@@ -560,10 +558,10 @@ video:
 width:1024
 height:768
 }
-videogid = 1 自加
-
 有序集合
-　美食　video_1 video_8  播放次数
-　女装　video_2 video_3  播放次数
-　男装　video_3 video_4  播放次数
+　美食　video_1 filemd5 播放次数
+　女装　video_2 filemd5  播放次数
+　男装　video_3 filemd5 播放次数
+　鞋帽　video_4 filemd5 播放次数
+　玩乐　video_5 filemd5 播放次数
 　

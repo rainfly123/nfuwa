@@ -22,28 +22,6 @@ import base64
 ACCESS_PATH = "http://wsim.66boss.com/fuwa/"
 STORE_PATH="/www/html/fuwa/"
 
-#ACCESS_URL = "http://live.66boss.com/livepic/"
-#STORE_PATH="/live/www/html/applylive/"
-
-class QueryHandler(tornado.web.RequestHandler):
-    def get(self):
-        resp = dict() 
-
-        geohash = self.get_argument("geohash", strip=True)
-        radius = self.get_argument("radius", strip=True)
-        geo = geohash.split('-')
-        if len(geo) != 2 or len(radius) < 1:
-            resp['code'] =  1
-            resp['message'] = "Parameter Error" 
-            self.write(json.dumps(resp))
-            return
-        
-        longitude, latitude = geo[0], geo[1] 
-        resp['code'] =  0
-        resp['message'] = "OK" 
-        resp['data'] = redi.QueryFuwa(longitude, latitude, radius)
-        self.write(json.dumps(resp))
-
 class Queryv2Handler(tornado.web.RequestHandler):
     def get(self):
         resp = dict() 
@@ -62,25 +40,6 @@ class Queryv2Handler(tornado.web.RequestHandler):
         resp['code'] =  0
         resp['message'] = "OK" 
         resp['data'] = redi.QueryFuwaNew(longitude, latitude, radius, biggest)
-        self.write(json.dumps(resp))
-
-class QueryStrangerHandler(tornado.web.RequestHandler):
-    def get(self):
-        resp = dict() 
-
-        geohash = self.get_argument("geohash", strip=True)
-        radius = self.get_argument("radius", strip=True)
-        geo = geohash.split('-')
-        if len(geo) != 2 or len(radius) < 1:
-            resp['code'] =  1
-            resp['message'] = "Parameter Error" 
-            self.write(json.dumps(resp))
-            return
-        
-        longitude, latitude = geo[0], geo[1] 
-        resp['code'] =  0
-        resp['message'] = "OK" 
-        resp['data'] = redi.QueryStrFuwa(longitude, latitude, radius)
         self.write(json.dumps(resp))
 
 class QueryStrangerv2Handler(tornado.web.RequestHandler):
@@ -400,10 +359,15 @@ class huodongHandler(tornado.web.RequestHandler):
         resp['data'] =  data
         self.write(json.dumps(resp))
 
+class classHandler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict()
+        resp['code'] = 0 
+        resp['message'] = "Ok" 
+        resp['data'] =  redi.Class()
+        self.write(json.dumps(resp))
 
 application = tornado.web.Application([
-    (r"/query", QueryHandler),
-    (r"/querystranger", QueryStrangerHandler),
     (r"/queryv2", Queryv2Handler),
     (r"/querystrangerv2", QueryStrangerv2Handler),
     (r"/hidev2", Hidev2Handler),
@@ -420,6 +384,7 @@ application = tornado.web.Application([
     (r"/donate", donateHandler),
     (r"/award", awardHandler),
     (r"/huodong", huodongHandler),
+    (r"/queryclass", classHandler),
 ])
 
 if __name__ == "__main__":
