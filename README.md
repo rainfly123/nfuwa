@@ -477,8 +477,9 @@ location: "广东 广州市"
 }
 ```
 
-#21 查询盟友视频入口则为http://fuwa.hmg66.com/api/querystrvideo?geohash=102.2301-33.2827&class=2
+#21 查询盟友视频入口则为http://fuwa.hmg66.com/api/querystrvideo?geohash=102.2301-33.2827
 同上 19
+区别在于没有分类
 
 #22 查询特定用户的福娃 ,观看完视频　带我去寻宝接口
 http://fuwa.hmg66.com/api/querystrangev3?geohash=102.2301-33.2827&radius=50000&biggest=0&userid=xx
@@ -547,8 +548,7 @@ fuwa_i 是寻宝福娃GEO地理位置信息
 
 ============个人笔记用，By Rain================
 video_c
-video_i
-地理位置坐标
+寻宝视频地理位置坐标
 
 filemd5{
 name:
