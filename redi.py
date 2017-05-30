@@ -299,23 +299,93 @@ def Hit(filemd5, classid):
 def QueryVideo(classid, longtitude, latitude):
     location = (latitude, longtitude)
     filemd5s = r.zrevrange("video_" + classid, 0, 9)
-    positions = r.geodist("video_g_"+classid, *filemd5s)
+    positions = r.geopos("video_g_" + classid, *filemd5s)
     distances = list()
-    for pos in postions
+    for pos in postions:
         dis = getdis.getdistance(location, (pos[1], pos[0]))
         distances.append(dis)
     results = list()
     which = 0
     for filemd5 in filemd5s:
         temp = dict()
-        name,gender,avatar,userid,video,width,height
-        temp['name']
+        name, gender, avatar, userid, video, width, height = \
+        r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
+        temp['name'] = name
+        temp['gender'] = gender
+        temp['avatar'] = avatar
+        temp['userid'] = userid
+        temp['video'] = video
+        temp['width'] = width
+        temp['height'] = height
+        temp['distance'] = distances[which]
+        temp['filemd5'] = filemd5
+        results.append(temp)
         which += 1 
-    return True
 
-def QueryStrVideo(classid):
-    filemd5s = r.zrevrange("video_i", 0, 49)
-    return True
+    videos = r.georadius("video_g_"+classid, longtitude, latitude, 50000, unit="m", withdist=True, sort="ASC")
+    for video in videos:
+        filemd5, far = video[0], video[1]
+        temp = dict()
+        name, gender, avatar, userid, video, width, height = \
+        r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
+        temp['name'] = name
+        temp['gender'] = gender
+        temp['avatar'] = avatar
+        temp['userid'] = userid
+        temp['video'] = video
+        temp['width'] = width
+        temp['height'] = height
+        temp['distance'] = far
+        temp['filemd5'] = filemd5
+        results.append(temp)
+
+    return results
+
+def QueryStrVideo(longtitude, latitude):
+    location = (latitude, longtitude)
+    filemd5s = r.zrevrange("video_i", 0, 9)
+    positions = r.geopos("video_g_i", *filemd5s)
+    distances = list()
+    for pos in postions:
+        dis = getdis.getdistance(location, (pos[1], pos[0]))
+        distances.append(dis)
+    results = list()
+    which = 0
+    for filemd5 in filemd5s:
+        temp = dict()
+        name, gender, avatar, userid, video, width, height = \
+        r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
+        temp['name'] = name
+        temp['gender'] = gender
+        temp['avatar'] = avatar
+        temp['userid'] = userid
+        temp['video'] = video
+        temp['width'] = width
+        temp['height'] = height
+        temp['distance'] = distances[which]
+        temp['filemd5'] = filemd5
+        results.append(temp)
+        which += 1 
+
+    videos = r.georadius("video_g_i", longtitude, latitude, 50000, unit="m", withdist=True, sort="ASC")
+    for video in videos:
+        filemd5, far = video[0], video[1]
+        temp = dict()
+        name, gender, avatar, userid, video, width, height = \
+        r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
+        temp['name'] = name
+        temp['gender'] = gender
+        temp['avatar'] = avatar
+        temp['userid'] = userid
+        temp['video'] = video
+        temp['width'] = width
+        temp['height'] = height
+        temp['distance'] = far
+        temp['filemd5'] = filemd5
+        results.append(temp)
+
+    return results
+
 
 #print QueryMyApply("100000076")
 #print QueryMy("100000320")
