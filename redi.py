@@ -6,6 +6,7 @@ import tornado
 import json
 import time
 import random
+import getdis
 
 STORE_PATH="/www/html/fuwa/"
 pool = redis.ConnectionPool(host='127.0.0.1', port=6379, password="aaa11bbb22")  
@@ -113,7 +114,7 @@ def QueryStrFuwaNew(longtitude, latitude, radius, biggest):
     return {"far":farfuwas, "near":nearfuwas}
 
 BASE = "https://api.66boss.com/ucenter/userinfo/info?user_id="
-def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, purpose\
+def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, purpose,\
                videogeo, filemd5):
 
     results = r.smembers(owner + "_apply")
