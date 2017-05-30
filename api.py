@@ -77,7 +77,7 @@ class Hidev2Handler(tornado.web.RequestHandler):
         detail = self.get_argument("detail", strip=True)
         number = self.get_argument("number", strip=True)
         purpose = self.get_argument("type", default='1', strip=True)
-        classid = self.get_argument("class", default='c', strip=True)
+        classid = self.get_argument("class", default='i', strip=True)
         videogeo = "video_g_" + classid
         geo = geohash.split('-')
         if len(geo) != 2 or len(number) < 1:
@@ -87,7 +87,7 @@ class Hidev2Handler(tornado.web.RequestHandler):
             return
         
         longtitude, latitude = geo[0], geo[1] 
-        redi.HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, int(number), purpose)
+        redi.HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, int(number), purpose, videogeo, filemd5)
         resp['code'] =  0
         resp['message'] = "Ok" 
         self.write(json.dumps(resp))

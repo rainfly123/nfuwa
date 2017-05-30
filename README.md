@@ -225,7 +225,8 @@ geohash 经纬度
 detail 福娃活动详情
 type=1福娃，０缘分
 number 藏福娃数量 （不能多于可用福娃数量,仅申请的福娃可以藏）
-class 分类，美食、服装，用１，２，３，，，
+class 分类，美食、女装，男装，鞋帽，娱乐，用１，２，３，4，5
+如果type=0藏缘分福娃，那么class 设置成i
 
 ```
 图片为file 视频为video
@@ -358,7 +359,8 @@ userid 用户ID
 #18增加播放次数
 http://fuwa.hmg66.com/api/hit?filemd5=adfefadfcafda&class=1&hash=
 filemd5 是视频文件ＭＤ５　校验值。
-class 是视频分类1,2,3,4,5,c 　美食，女装，男装，鞋帽，玩乐，萌友
+class 是视频分类1,2,3,4,5, 美食，女装，男装，鞋帽，玩乐，
+如果是萌友视频class设置为i
 hash 是签名
 
 
@@ -499,6 +501,8 @@ http://fuwa.hmg66.com/api/queryclass
    {name:"美食", enum:"1"},
    {name:"女装", enum:"2"},
    {name:"男装", enum:"3"},
+   {name:"鞋帽", enum:"4"},
+   {name:"玩乐", enum:"5"},
    ]
 }
 ```

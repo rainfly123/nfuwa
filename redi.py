@@ -113,7 +113,8 @@ def QueryStrFuwaNew(longtitude, latitude, radius, biggest):
     return {"far":farfuwas, "near":nearfuwas}
 
 BASE = "https://api.66boss.com/ucenter/userinfo/info?user_id="
-def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, purpose):
+def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, purpose\
+               videogeo, filemd5):
 
     results = r.smembers(owner + "_apply")
     shufflefuwas = list(results)
@@ -126,6 +127,10 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if fuwagid.find('i') > 0:
                 continue
             r.geoadd("fuwa_c", longtitude, latitude, fuwagid)
+            r.geoadd(videogeo, longtitude, latitude, filemd5)
+            name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
+            vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
+            r.hmset(filemd5, vdic) 
             dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows}
             r.hmset(fuwagid, dic) 
             r.srem(owner + "_apply", fuwagid)
@@ -138,6 +143,10 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if fuwagid.find('c') > 0:
                 continue
             r.geoadd("fuwa_i", longtitude, latitude, fuwagid)
+            r.geoadd(videogeo, longtitude, latitude, filemd5)
+            name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
+            vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
+            r.hmset(filemd5, vdic) 
             dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows}
             r.hmset(fuwagid, dic) 
             r.srem(owner + "_apply", fuwagid)
