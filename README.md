@@ -356,8 +356,9 @@ userid 用户ID
 
 
 #18增加播放次数
-http://fuwa.hmg66.com/api/filemd5=adfefadfcafda&hash=
+http://fuwa.hmg66.com/api/filemd5=adfefadfcafda&class=1&hash=
 filemd5 是视频文件ＭＤ５　校验值。
+class 是视频分类1,2,3,4,5
 hash 是签名
 
 
