@@ -296,6 +296,27 @@ def Hit(filemd5, classid):
     r.zincrby("video_" + classid, filemd5, amount=1)
     return True
 
+def QueryVideo(classid, longtitude, latitude):
+    location = (latitude, longtitude)
+    filemd5s = r.zrevrange("video_" + classid, 0, 9)
+    positions = r.geodist("video_g_"+classid, *filemd5s)
+    distances = list()
+    for pos in postions
+        dis = getdis.getdistance(location, (pos[1], pos[0]))
+        distances.append(dis)
+    results = list()
+    which = 0
+    for filemd5 in filemd5s:
+        temp = dict()
+        name,gender,avatar,userid,video,width,height
+        temp['name']
+        which += 1 
+    return True
+
+def QueryStrVideo(classid):
+    filemd5s = r.zrevrange("video_i", 0, 49)
+    return True
+
 #print QueryMyApply("100000076")
 #print QueryMy("100000320")
 #print CaptureFuwa("http://afa/daf/pic.jpg", "john", "fuwa_1")
