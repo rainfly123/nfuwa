@@ -553,6 +553,7 @@ video_3 男装
 video_4 鞋帽
 video_5 玩乐
 寻宝视频地理位置坐标
+video_i 盟友视频地理位置坐标
 
 filemd5{
 name:
@@ -569,6 +570,8 @@ height:768
 　男装　video_3 filemd5 播放次数
 　鞋帽　video_4 filemd5 播放次数
 　玩乐　video_5 filemd5 播放次数
+
+盟友　　video_i filemd5 播放次数
 　
 推荐算法　前十名最热视频，优先返回，geodistance 求距离，
 然后再按距离运近推荐 georadius withdistance asc
