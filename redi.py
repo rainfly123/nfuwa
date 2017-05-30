@@ -278,9 +278,13 @@ def Huodong(gid):
 
 aclass =[{"name":"美食", "enum":"1"}, {"name":"女装", "enum":"2"}, {"name":"男装", "enum":"3"},\
         {"name":"鞋帽", "enum":"4"}, {"name":"玩乐", "enum":"5"}]
+
 def Class():
     return aclass
 
+def Hit(filemd5, classid):
+    r.zincrby("video_" + classid, filemd5, amount=1)
+    return True
 
 #print QueryMyApply("100000076")
 #print QueryMy("100000320")

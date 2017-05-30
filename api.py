@@ -367,6 +367,36 @@ class classHandler(tornado.web.RequestHandler):
         resp['data'] =  redi.Class()
         self.write(json.dumps(resp))
 
+class hitHandler(tornado.web.RequestHandler):
+    def get(self):
+        sign = hashlib.md5()
+        resp = dict()
+        filemd5 = self.get_argument("filemd5", strip=True)
+        classid = self.get_argument("class", strip=True)
+        signin = self.get_argument("sign", strip=True)
+        if len(signin) < 5 or len(classid) < 10 or len(filemd5) < 3:
+            resp['code'] =  1
+            resp['message'] = "Parameter Error"
+            self.write(json.dumps(resp))
+            return
+        where = self.request.uri.find("&sign=")
+        src = self.request.uri[:where] + "&platform=boss66"
+        sign.update(src)
+        signout = sign.hexdigest()
+        if signin != signout:
+            print signout, signin
+            resp['code'] =  2
+            resp['message'] = "Sign Error"
+            self.write(json.dumps(resp))
+            return
+
+        data = redi.Hit(filemd5, classid)
+
+        resp['code'] =  0
+        resp['message'] = "Ok"
+        resp['data'] = data
+        self.write(json.dumps(resp))
+
 application = tornado.web.Application([
     (r"/queryv2", Queryv2Handler),
     (r"/querystrangerv2", QueryStrangerv2Handler),
@@ -385,6 +415,7 @@ application = tornado.web.Application([
     (r"/award", awardHandler),
     (r"/huodong", huodongHandler),
     (r"/queryclass", classHandler),
+    (r"/hit", hitHandler),
 ])
 
 if __name__ == "__main__":
