@@ -547,7 +547,11 @@ fuwa_i 是缘分福娃GEO地理位置信息
 fuwa_i 是寻宝福娃GEO地理位置信息
 
 ============个人笔记用，By Rain================
-video_c
+video_1 美食
+video_2 女装 
+video_3 男装
+video_4 鞋帽
+video_5 玩乐
 寻宝视频地理位置坐标
 
 filemd5{
@@ -566,3 +570,6 @@ height:768
 　鞋帽　video_4 filemd5 播放次数
 　玩乐　video_5 filemd5 播放次数
 　
+推荐算法　前十名最热视频，优先返回，geodistance 求距离，
+然后再按距离运近推荐 georadius withdistance asc
+
