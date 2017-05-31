@@ -1,6 +1,6 @@
 # fuwa
 
-#1 查询周围的福娃
+# 1 查询周围的福娃
 http://fuwa.hmg66.com/api/queryv2?geohash=102.2301-33.2827&radius=10000&biggest=0
 经度－纬度
 查询自己周围radius半径远的福娃，单位m
@@ -80,7 +80,7 @@ location: "广东 广州市"
 }
 }
 ```
-#1.1 查询周围的缘分
+# 1.1 查询周围的缘分
 http://fuwa.hmg66.com/api/querystrangerv2?geohash=102.2301-33.2827&radius=10000&biggest=x
 经度－纬度
 查询自己周围radius半径远的福娃，单位m
@@ -161,7 +161,7 @@ location: "广东 广州市"
 }
 ```
 
-#2.1 查询自己抓到的福娃
+# 2.1 查询自己抓到的福娃
 http://fuwa.hmg66.com/api/querymy?user=100000076
 
 ```
@@ -185,7 +185,7 @@ http://fuwa.hmg66.com/api/querymy?user=100000076
    "creatorid": "100000076"
 },
 ```
-#2.2 查询自己申请的福娃
+# 2.2 查询自己申请的福娃
 http://fuwa.hmg66.com/api/querymyapply?user=100000076
 
 ```
@@ -204,18 +204,18 @@ http://fuwa.hmg66.com/api/querymyapply?user=100000076
 },
 ```
 
-#3 抓福娃　不再使用
+# 3 抓福娃　不再使用
 POST http://fuwa.hmg66.com/api/capture?user=xxx&gid=xx&sign=xx
 gid 是福娃全局ＩＤ
 照片ＰＯＳＴ　在body里面name=file
 
-#3.1 抓福娃
+# 3.1 抓福娃
 GET http://fuwa.hmg66.com/api/capturev2?user=xxx&gid=xx&sign=xx
 gid 是福娃全局ＩＤ
 sign 是签名
 user=是userid
 
-#5 藏福娃 
+# 5 藏福娃 
 POST http://fuwa.hmg66.com/api/hidev2?owner=xx&detail=店内活动&pos=xx&geohash=102.2-33.22&validtime=1/2/3/4&number=xxx&type=1/0&class=1
 owner福娃所有者
 pos 福娃位置　比如广州珠江纺织城Ａ区
@@ -237,7 +237,7 @@ class 分类，美食、女装，男装，鞋帽，娱乐，用１，２，３�
     </form>
 ```
 
-#7 福娃详情
+# 7 福娃详情
 http://fuwa.hmg66.com/api/querydetail?fuwagid=fuwa_i_110
 ###当用户停留在背包-福娃详情页面时，需要定时3秒请求接口，刷新
 ```
@@ -251,7 +251,7 @@ creator: "雨飞的"
 }
 }
 ```
-#7.1 福娃活动介绍
+# 7.1 福娃活动介绍
 http://fuwa.hmg66.com/api/huodong?fuwagid=fuwa_i_110
 ```
 {
@@ -261,13 +261,13 @@ data: "抢到本次福娃用户，本店消费全场八折"
 }
 ```
 
-#8 查询出售 
+# 8 查询出售 
 http://fuwa.hmg66.com/msg/querysell
 
-#8.1 查询我的出售 
+# 8.1 查询我的出售 
 http://fuwa.hmg66.com/msg/querymysell?userid=xx
 
-#9 出售福娃
+# 9 出售福娃
 http://fuwa.hmg66.com/msg/sell?id=xx&owner=xx&amount=x&fuwagid=x&sign=x
 id是福娃编号
 amount 是售价
@@ -275,10 +275,10 @@ fuwagid 是福娃全局标识
 sign 签名
 sign=md5(/sell?id=xx&owner=xx&amount=x&fuwagid=x&platform=boss66)
 
-#10 支付系统通知购买成功 
+# 10 支付系统通知购买成功 
 http://fuwa.hmg66.com/msg/notice?orderid=xx&buyer=x&fuwagid=x
 
-#11查询我的消息　
+# 11 查询我的消息　
 http://fuwa.hmg66.com/msg/myinfo?userid=
 ```
 {
@@ -308,7 +308,7 @@ http://fuwa.hmg66.com/msg/myinfo?userid=
 }
 ```
 
-#12赠送福娃
+# 12 赠送福娃
 http://fuwa.hmg66.com/api/donate?token=xx&fuwagid=xx&fromuser=xx&sign=mmm
 token = base64(接收福娃用户的id)
 fuwagid 要赠送的福娃全局标识
@@ -316,7 +316,7 @@ fromuser 赠送人的用户id
 sign  签名
 sign=md5(/donate?token=xx&fuwagid=xx&fromuser=xx&platform=boss66)
 
-#13申请福娃
+# 13 申请福娃
 http://fuwa.hmg66.com/msg/apply?userid=xx&name=xxx&phone=zz&shop=1&purpose=店内活动&region=广州&number=100
 userid 用户ＩＤ
 name 联系人姓名或公司名
@@ -326,7 +326,7 @@ purpose 活动说明
 region 福娃使用区域
 number 申请福娃个数
 
-#14扫描福娃，发送奖品，
+# 14 扫描福娃，发送奖品，
 http://fuwa.hmg66.com/api/award?userid=xx&fuwagid=xx
 userid 用户ＩＤ 一般是商家用户ＩＤ ，准确来说是福娃创建者id
 fuwagid 福娃ｉｄ
@@ -339,11 +339,11 @@ fuwagid 福娃ｉｄ
 ```
 
 
-#15撤销我的出售
+# 15 撤销我的出售
 http://fuwa.hmg66.com/msg/cancelsell?orderid=xx&fuwagid=xx&userid=xx
 
 
-#16提现申请
+# 16 提现申请
 http://fuwa.hmg66.com/msg/money?userid=xx&amount=xx&alipay=xx&name=小啊&sign=xx
 userid 用户ID
 amount 体现金额
@@ -351,12 +351,12 @@ alipay 支付宝帐号
 sign 签名
 md5(/money?userid=100000076&alipay=22233322x&amount=13&name=%E5%B0%8F%E5%95%8A&platform=boss66)
 
-#17查询可用余额
+# 17 查询可用余额
 http://fuwa.hmg66.com/msg/querymoney?userid=100000078
 userid 用户ID
 
 
-#18增加播放次数
+# 18 增加播放次数
 http://fuwa.hmg66.com/api/hit?filemd5=adfefadfcafda&class=1&hash=
 filemd5 是视频文件ＭＤ５　校验值。
 class 是视频分类1,2,3,4,5, 美食，女装，男装，鞋帽，玩乐，
@@ -364,7 +364,7 @@ class 是视频分类1,2,3,4,5, 美食，女装，男装，鞋帽，玩乐，
 hash 是签名
 
 
-#19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=2
+# 19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=2
 class 是分类1,2,3,4,,,,
 
 ```
@@ -398,7 +398,7 @@ class 是分类1,2,3,4,,,,
     ]
 }
 ```
-#20 查询特定商家的福娃 ,观看完视频　带我去寻宝接口
+# 20 查询特定商家的福娃 ,观看完视频　带我去寻宝接口
 http://fuwa.hmg66.com/api/queryv3?geohash=102.2301-33.2827&radius=50000&biggest=0&userid=xx
 geohash 经度－纬度
 查询商家radius半径远的福娃，单位m 此处应该是视频离你距离一倍，如果视频距离你500M 那么调用这个接口时，radius=1000
@@ -479,11 +479,11 @@ location: "广东 广州市"
 }
 ```
 
-#21 查询盟友视频入口则为http://fuwa.hmg66.com/api/querystrvideo?geohash=102.2301-33.2827
+# 21 查询盟友视频入口则为http://fuwa.hmg66.com/api/querystrvideo?geohash=102.2301-33.2827
 同上 19
 区别在于没有分类
 
-#22 查询特定用户的福娃 ,观看完视频　带我去寻宝接口
+# 22 查询特定用户的福娃 ,观看完视频　带我去寻宝接口
 http://fuwa.hmg66.com/api/querystrangev3?geohash=102.2301-33.2827&radius=50000&biggest=0&userid=xx
 同20 一直
 geohash 经度－纬度
@@ -491,7 +491,7 @@ geohash 经度－纬度
 第一次调用biggest = 0
 后续调用　取返回near中福娃gid 最后一个数值，比如fuwa_i_2323 则biggest=2323 依次类推
 
-#23 查询分类
+# 23 查询分类
 http://fuwa.hmg66.com/api/queryclass
 ```
 {
@@ -507,7 +507,7 @@ http://fuwa.hmg66.com/api/queryclass
 }
 ```
 
-#关于签名 
+# 关于签名 
 只对抓福娃ＵＲＬ　签名，其余不要求
 每个url后面都有 sign=xxx 签名计算方法是对uri&platform=boss66 进行md5
 uri 是这个地址串 不含sign=
@@ -517,7 +517,7 @@ md5(/capture?user=john&gid=fuwa_6&platform=boss66)
 结果：
 7ad54cafb52668e4264320c3145c6422
 
-##二维码格式
+## 二维码格式
 第一种       fuwa:fuwa:fuwa_c_123                      
 第二种       fuwa:user:AEjOkadJMKaGK 
                         
