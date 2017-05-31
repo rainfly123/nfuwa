@@ -19,7 +19,7 @@ import mysql
 import hashlib
 import redis
 
-pool = redis.ConnectionPool(host='127.0.0.1', port=6379, password="aaa11bbb22")  
+pool = redis.ConnectionPool(host='127.0.0.1', port=6379, db=1, password="aaa11bbb22")  
 r = redis.Redis(connection_pool=pool)  
 
 class QuerysellHandler(tornado.web.RequestHandler):
