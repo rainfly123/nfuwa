@@ -401,7 +401,7 @@ class 是分类1,2,3,4,,,,
 #20 查询特定商家的福娃 ,观看完视频　带我去寻宝接口
 http://fuwa.hmg66.com/api/queryv3?geohash=102.2301-33.2827&radius=50000&biggest=0&userid=xx
 geohash 经度－纬度
-查询商家radius半径远的福娃，单位m 此处应该是固定值，比如50000 50KM 一个城市的距离
+查询商家radius半径远的福娃，单位m 此处应该是视频离你距离一倍，如果视频距离你500M 那么调用这个接口时，radius=1000
 第一次调用biggest = 0
 后续调用　取返回near中福娃gid 最后一个数值，比如fuwa_c_2323 则biggest=2323 依次类推
 

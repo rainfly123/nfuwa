@@ -42,6 +42,27 @@ class Queryv2Handler(tornado.web.RequestHandler):
         resp['data'] = redi.QueryFuwaNew(longitude, latitude, radius, biggest)
         self.write(json.dumps(resp))
 
+class Queryv3Handler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict() 
+
+        geohash = self.get_argument("geohash", strip=True)
+        radius = self.get_argument("radius", strip=True)
+        biggest = self.get_argument("biggest", strip=True)
+        userid = self.get_argument("userid", strip=True)
+        geo = geohash.split('-')
+        if len(geo) != 2 or len(radius) < 1:
+            resp['code'] =  1
+            resp['message'] = "Parameter Error" 
+            self.write(json.dumps(resp))
+            return
+        
+        longitude, latitude = geo[0], geo[1] 
+        resp['code'] =  0
+        resp['message'] = "OK" 
+        resp['data'] = redi.QueryFuwav3(longitude, latitude, radius, biggest, userid)
+        self.write(json.dumps(resp))
+
 class QueryStrangerv2Handler(tornado.web.RequestHandler):
     def get(self):
         resp = dict() 
@@ -61,6 +82,28 @@ class QueryStrangerv2Handler(tornado.web.RequestHandler):
         resp['message'] = "OK" 
         resp['data'] = redi.QueryStrFuwaNew(longitude, latitude, radius, biggest)
         self.write(json.dumps(resp))
+
+class QueryStrangerv3Handler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict() 
+
+        geohash = self.get_argument("geohash", strip=True)
+        radius = self.get_argument("radius", strip=True)
+        biggest = self.get_argument("biggest", strip=True)
+        userid = self.get_argument("userid", strip=True)
+        geo = geohash.split('-')
+        if len(geo) != 2 or len(radius) < 1:
+            resp['code'] =  1
+            resp['message'] = "Parameter Error" 
+            self.write(json.dumps(resp))
+            return
+        
+        longitude, latitude = geo[0], geo[1] 
+        resp['code'] =  0
+        resp['message'] = "OK" 
+        resp['data'] = redi.QueryStrFuwav3(longitude, latitude, radius, biggest, userid)
+        self.write(json.dumps(resp))
+
 
 def getFileName():
     source = list(string.lowercase) 
@@ -407,6 +450,8 @@ class hitHandler(tornado.web.RequestHandler):
 application = tornado.web.Application([
     (r"/queryv2", Queryv2Handler),
     (r"/querystrangerv2", QueryStrangerv2Handler),
+    (r"/queryv3", Queryv3Handler),
+    (r"/querystrangerv3", QueryStrangerv3Handler),
     (r"/hidev2", Hidev2Handler),
     (r"/capture", CaptureHandler),
     (r"/capturev2", Capturev2Handler),
