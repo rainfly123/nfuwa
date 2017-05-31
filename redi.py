@@ -54,12 +54,16 @@ def QueryFuwaNew(longtitude, latitude, radius, biggest):
                   "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
                   "video":video, "hider": owner, "number":1}
         total = len(farfuwas)
+        if total == 0:
+            farfuwas.append(result)
+            continue
         for x in xrange(total):
             if farfuwas[x]['geo'] == geo:
                 farfuwas[x]['number'] += 1
-        if x == (total - 1):
+                x = total
+                break
+        if x != total:
             farfuwas.append(result)
-        farfuwas.append(result)
 
     return {"far":farfuwas, "near":nearfuwas}
 
@@ -104,12 +108,16 @@ def QueryStrFuwaNew(longtitude, latitude, radius, biggest):
                   "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
                   "video":video, "hider": owner, "number":1}
         total = len(farfuwas)
+        if total == 0:
+            farfuwas.append(result)
+            continue
         for x in xrange(total):
             if farfuwas[x]['geo'] == geo:
                 farfuwas[x]['number'] += 1
-        if x == (total - 1):
+                x = total
+                break
+        if x != total:
             farfuwas.append(result)
-        farfuwas.append(result)
 
     return {"far":farfuwas, "near":nearfuwas}
 
@@ -165,12 +173,16 @@ def QueryFuwav3(longtitude, latitude, radius, biggest, creator):
                   "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
                   "video":video, "hider": owner, "number":1}
         total = len(farfuwas)
+        if total == 0:
+            farfuwas.append(result)
+            continue
         for x in xrange(total):
             if farfuwas[x]['geo'] == geo:
                 farfuwas[x]['number'] += 1
-        if x == (total - 1):
+                x = total
+                break
+        if x != total:
             farfuwas.append(result)
-        farfuwas.append(result)
 
     return {"far":farfuwas, "near":nearfuwas}
 
@@ -226,12 +238,16 @@ def QueryStrFuwav3(longtitude, latitude, radius, biggest, creator):
                   "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
                   "video":video, "hider": owner, "number":1}
         total = len(farfuwas)
+        if total == 0:
+            farfuwas.append(result)
+            continue
         for x in xrange(total):
             if farfuwas[x]['geo'] == geo:
                 farfuwas[x]['number'] += 1
-        if x == (total - 1):
+                x = total
+                break
+        if x != total:
             farfuwas.append(result)
-        farfuwas.append(result)
 
     return {"far":farfuwas, "near":nearfuwas}
 
