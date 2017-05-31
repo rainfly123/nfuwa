@@ -357,11 +357,11 @@ userid 用户ID
 
 
 # 18 增加播放次数
-http://fuwa.hmg66.com/api/hit?filemd5=adfefadfcafda&class=1&hash=
+http://fuwa.hmg66.com/api/hit?filemd5=adfefadfcafda&class=1&sign=
 filemd5 是视频文件ＭＤ５　校验值。
 class 是视频分类1,2,3,4,5, 美食，女装，男装，鞋帽，玩乐，
 如果是萌友视频class设置为i
-hash 是签名
+sign 是签名
 
 
 # 19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=2

@@ -424,7 +424,7 @@ class hitHandler(tornado.web.RequestHandler):
         filemd5 = self.get_argument("filemd5", strip=True)
         classid = self.get_argument("class", strip=True)
         signin = self.get_argument("sign", strip=True)
-        if len(signin) < 5 or len(classid) < 10 or len(filemd5) < 3:
+        if len(signin) < 5 or len(classid) < 1 or len(filemd5) < 3:
             resp['code'] =  1
             resp['message'] = "Parameter Error"
             self.write(json.dumps(resp))
@@ -447,6 +447,43 @@ class hitHandler(tornado.web.RequestHandler):
         resp['data'] = data
         self.write(json.dumps(resp))
 
+class queryvideoHandler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict() 
+
+        geohash = self.get_argument("geohash", strip=True)
+        classid = self.get_argument("class", strip=True)
+        geo = geohash.split('-')
+        if len(geo) != 2 or len(classid) < 1:
+            resp['code'] =  1
+            resp['message'] = "Parameter Error" 
+            self.write(json.dumps(resp))
+            return
+        
+        longitude, latitude = geo[0], geo[1] 
+        resp['code'] =  0
+        resp['message'] = "OK" 
+        resp['data'] = redi.QueryVideo(classid, longitude, latitude)
+        self.write(json.dumps(resp))
+
+class querystrvideoHandler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict() 
+
+        geohash = self.get_argument("geohash", strip=True)
+        geo = geohash.split('-')
+        if len(geo) != 2:
+            resp['code'] =  1
+            resp['message'] = "Parameter Error" 
+            self.write(json.dumps(resp))
+            return
+        
+        longitude, latitude = geo[0], geo[1] 
+        resp['code'] =  0
+        resp['message'] = "OK" 
+        resp['data'] = redi.QueryStrVideo(longitude, latitude)
+        self.write(json.dumps(resp))
+
 application = tornado.web.Application([
     (r"/queryv2", Queryv2Handler),
     (r"/querystrangerv2", QueryStrangerv2Handler),
@@ -467,6 +504,8 @@ application = tornado.web.Application([
     (r"/award", awardHandler),
     (r"/huodong", huodongHandler),
     (r"/queryclass", classHandler),
+    (r"/queryvideo", queryvideoHandler),
+    (r"/querystrvideo", querystrvideoHandler),
     (r"/hit", hitHandler),
 ])
 
