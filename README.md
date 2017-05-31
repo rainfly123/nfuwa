@@ -215,6 +215,26 @@ gid 是福娃全局ＩＤ
 sign 是签名
 user=是userid
 
+```
+返回结果可能为以下其一：ａｐｐ 要能显示给用户
+{
+ code: 0
+ message: "OK"
+}
+{
+ code: 1
+ message: "Parameter Error"
+}
+{
+ code: 2
+ message: "Sign Error"
+}
+{
+ code: 3
+ message: "明天再来吧"
+}
+```
+
 # 5 藏福娃 
 POST http://fuwa.hmg66.com/api/hidev2?owner=xx&detail=店内活动&pos=xx&geohash=102.2-33.22&validtime=1/2/3/4&number=xxx&type=1/0&class=1
 owner福娃所有者
