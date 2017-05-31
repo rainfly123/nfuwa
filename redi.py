@@ -266,11 +266,11 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if fuwagid.find('i') > 0:
                 continue
             r.geoadd("fuwa_c", longtitude, latitude, fuwagid)
+            name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
             if len(filemd5) > 5:
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
-            name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
-            vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
-            r.hmset(filemd5, vdic) 
+                vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
+                r.hmset(filemd5, vdic) 
             dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows}
             r.hmset(fuwagid, dic) 
             r.srem(owner + "_apply", fuwagid)
@@ -283,11 +283,11 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if fuwagid.find('c') > 0:
                 continue
             r.geoadd("fuwa_i", longtitude, latitude, fuwagid)
+            name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
             if len(filemd5) > 5:
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
-            name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
-            vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
-            r.hmset(filemd5, vdic) 
+                vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
+                r.hmset(filemd5, vdic) 
             dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows}
             r.hmset(fuwagid, dic) 
             r.srem(owner + "_apply", fuwagid)
