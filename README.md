@@ -484,7 +484,7 @@ location: "广东 广州市"
 区别在于没有分类
 
 # 22 查询特定用户的福娃 ,观看完视频　带我去寻宝接口
-http://fuwa.hmg66.com/api/querystrangev3?geohash=102.2301-33.2827&radius=50000&biggest=0&userid=xx
+http://fuwa.hmg66.com/api/querystrangerv3?geohash=102.2301-33.2827&radius=50000&biggest=0&userid=xx
 同20 一直
 geohash 经度－纬度
 查询特定用户radius半径远的福娃，单位m 此处应该是固定值，比如50000 50KM 一个城市的距离
