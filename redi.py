@@ -12,7 +12,7 @@ STORE_PATH="/www/html/fuwa/"
 pool = redis.ConnectionPool(host='127.0.0.1', port=6379, db=1, password="aaa11bbb22")  
 r = redis.Redis(connection_pool=pool)  
 
-HOWFAR = 30 
+HOWFAR = 60 
 def QueryFuwaNew(longtitude, latitude, radius, biggest):
     if biggest == "0":
         biggest = 0x1fffffff
@@ -96,6 +96,56 @@ def QueryStrFuwaNew(longtitude, latitude, radius, biggest):
         fuwaid, distance = fuwa[0], fuwa[1]
         detail, pos, pic, idd = r.hmget(fuwaid, "detail", "pos", "pic", "id")
         geohash = r.geopos("fuwa_i", fuwaid)
+        geo = "%f-%f"%(geohash[0][0], geohash[0][1])
+
+        name, avatar, gender, signature, location, video, owner = r.hmget(fuwaid, "name", "avatar", "gender", "signature", "location", "video", "owner")
+
+        result  = {"distance":distance, "pos":pos, "geo":geo, "pic":pic, "detail":detail,\
+                  "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
+                  "video":video, "hider": owner, "number":1}
+        total = len(farfuwas)
+        for x in xrange(total):
+            if farfuwas[x]['geo'] == geo:
+                farfuwas[x]['number'] += 1
+        if x == (total - 1):
+            farfuwas.append(result)
+        farfuwas.append(result)
+
+    return {"far":farfuwas, "near":nearfuwas}
+
+def QueryFuwav3(longtitude, latitude, radius, biggest):
+    if biggest == "0":
+        biggest = 0x1fffffff
+    else:
+        biggest = int(biggest)
+
+    fuwas = r.georadius("fuwa_c", longtitude, latitude, int(radius), unit="m", withdist=True)
+    near = [x for x in fuwas if x[1] <= HOWFAR and int(x[0][7:]) < biggest]
+    far = [x for x in fuwas if x[1] > HOWFAR]
+    near = sorted(near, key=lambda x: int(x[0][7:]), reverse=True)
+    near = near[:100]
+
+    nearfuwas = list()
+    for fuwa in near:
+        fuwaid, distance = fuwa[0], fuwa[1]
+        detail, pos, pic, idd = r.hmget(fuwaid, "detail", "pos", "pic", "id")
+        geohash = r.geopos("fuwa_c", fuwaid)
+        geo = "%f-%f"%(geohash[0][0], geohash[0][1])
+
+        name, avatar, gender, signature, location, video, owner = r.hmget(fuwaid, "name", "avatar", "gender", "signature", "location", "video", "owner")
+
+        result  = {"gid":fuwaid, "distance":distance, "pos":pos, "id":idd, "geo":geo, "pic":pic, "detail":detail,\
+                  "name":name, "avatar":avatar, "gender":gender, "signature":signature, "location":location,\
+                  "video":video, "hider": owner}
+        nearfuwas.append(result)
+
+    farfuwas = list()
+    for fuwa in far:
+        if len(farfuwas) >= 300:
+            break
+        fuwaid, distance = fuwa[0], fuwa[1]
+        detail, pos, pic, idd = r.hmget(fuwaid, "detail", "pos", "pic", "id")
+        geohash = r.geopos("fuwa_c", fuwaid)
         geo = "%f-%f"%(geohash[0][0], geohash[0][1])
 
         name, avatar, gender, signature, location, video, owner = r.hmget(fuwaid, "name", "avatar", "gender", "signature", "location", "video", "owner")
