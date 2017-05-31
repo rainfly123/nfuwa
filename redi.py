@@ -319,16 +319,16 @@ def CaptureFuwa(pic, user, gid):
     return True
 
 def Capturev2Fuwa(user, gid):
-
-    pipe = r.pipeline()
-    pipe.hset(gid, "owner", user)
-    pipe.sadd(user + "_pack", gid)
+    val = 0
     if gid.find('c') > 0:
-        pipe.zrem("fuwa_c", gid)
+        val = r.zrem("fuwa_c", gid)
     else:
-        pipe.zrem("fuwa_i", gid)
-    pipe.execute()
-    return True
+        val = r.zrem("fuwa_i", gid)
+    if val == 1 :
+        r.hset(gid, "owner", user)
+        r.sadd(user + "_pack", gid)
+        return True
+    return False
 
 def QueryMy(user):
     outs = list()
