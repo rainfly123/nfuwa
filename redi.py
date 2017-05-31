@@ -441,7 +441,7 @@ def QueryVideo(classid, longtitude, latitude):
     filemd5s = r.zrevrange("video_" + classid, 0, 9)
     positions = r.geopos("video_g_" + classid, *filemd5s)
     distances = list()
-    for pos in postions:
+    for pos in positions:
         dis = getdis.getdistance(location, (pos[1], pos[0]))
         distances.append(dis)
     results = list()
@@ -486,7 +486,7 @@ def QueryStrVideo(longtitude, latitude):
     filemd5s = r.zrevrange("video_i", 0, 9)
     positions = r.geopos("video_g_i", *filemd5s)
     distances = list()
-    for pos in postions:
+    for pos in positions:
         dis = getdis.getdistance(location, (pos[1], pos[0]))
         distances.append(dis)
     results = list()
