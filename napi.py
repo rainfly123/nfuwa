@@ -18,6 +18,7 @@ import redi
 import hashlib
 import toplist
 import base64
+import time
 
 ACCESS_PATH = "http://wsim.66boss.com/fuwa/"
 STORE_PATH="/www/html/fuwa/"
@@ -423,8 +424,9 @@ class hitHandler(tornado.web.RequestHandler):
         resp = dict()
         filemd5 = self.get_argument("filemd5", strip=True)
         classid = self.get_argument("class", strip=True)
+        timein = self.get_argument("time", strip=True)
         signin = self.get_argument("sign", strip=True)
-        if len(signin) < 5 or len(classid) < 1 or len(filemd5) < 3:
+        if len(signin) < 5 or len(classid) < 1 or len(filemd5) < 3 or len(timein) < 5:
             resp['code'] =  1
             resp['message'] = "Parameter Error"
             self.write(json.dumps(resp))
@@ -440,7 +442,11 @@ class hitHandler(tornado.web.RequestHandler):
             self.write(json.dumps(resp))
             return
 
-        data = redi.Hit(filemd5, classid)
+        timeplay = int(timein)
+        now = int(time.time())
+
+        if now - timeplay < 60:
+            data = redi.Hit(filemd5, classid)
 
         resp['code'] =  0
         resp['message'] = "Ok"
