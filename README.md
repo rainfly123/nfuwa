@@ -386,6 +386,7 @@ sign 是签名
 
 # 19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=2
 class 是分类1,2,3,4,,,,
+geohash 是当前经纬度
 
 ```
 {
