@@ -15,7 +15,8 @@ touch $pid
         if [ ! -f $jpg ]
         then
             /usr/local/bin/ffmpeg -loglevel quiet -i $file -vframes 1 -f image2 -y $jpg
-            nohup qrsctl put -c wsim fuwa/$file   $file &
+          #  nohup qrsctl put -c wsim fuwa/$file   $file &
+            ./tool.py $jpg
         fi
     done
     sleep 1
@@ -26,7 +27,8 @@ touch $pid
         if [ ! -f $jpg ]
         then
             /usr/local/bin/ffmpeg -loglevel quiet -i $file -vframes 1 -f image2 -y $jpg
-            nohup qrsctl put -c wsim fuwa/$file   $file & 
+          #  nohup qrsctl put -c wsim fuwa/$file   $file & 
+            ./tool.py $jpg
         fi
     done
 
