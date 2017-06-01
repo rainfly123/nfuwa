@@ -445,6 +445,7 @@ class hitHandler(tornado.web.RequestHandler):
         timeplay = int(timein)
         now = int(time.time())
 
+        data = False
         if now - timeplay < 60:
             data = redi.Hit(filemd5, classid)
 
