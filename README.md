@@ -384,7 +384,7 @@ class 是视频分类1,2,3,4,5, 美食，女装，男装，鞋帽，玩乐，
 sign 是签名
 
 
-# 19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=2
+# 19 查询福娃视频入口则为http://fuwa.hmg66.com/api/queryvideo?geohash=102.2301-33.2827&class=1
 class 是分类1,2,3,4,,,,
 geohash 是当前经纬度
 
