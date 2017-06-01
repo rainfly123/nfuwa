@@ -14,7 +14,7 @@ STORE_PATH="/www/html/fuwa/"
 pool = redis.ConnectionPool(host='127.0.0.1', port=6379, db=1, password="aaa11bbb22")  
 r = redis.Redis(connection_pool=pool)  
 
-HOWFAR = 100
+HOWFAR = 300
 def QueryFuwaNew(longtitude, latitude, radius, biggest):
     if biggest == "0":
         biggest = 0x1fffffff
