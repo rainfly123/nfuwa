@@ -8,6 +8,7 @@ import time
 import random
 import getdis
 from tornado.httpclient import AsyncHTTPClient
+from tornado.httputil import url_concat
 
 STORE_PATH="/www/html/fuwa/"
 pool = redis.ConnectionPool(host='127.0.0.1', port=6379, db=1, password="aaa11bbb22")  
@@ -411,7 +412,7 @@ def Donate(touser, gid, fromuser):
     params = {"owner": touser, "buyer":fromuser}
     url = url_concat("http://127.0.0.1:2688/donatemsg?", params)
     http_client = AsyncHTTPClient()
-    non = http_client.fetch(url)
+    non = http_client.fetch(url, callback=None)
     return 0
 
 MES1 = u"你不是福娃的生成者"
