@@ -256,6 +256,23 @@ def CancelSell(orderid):
     cur.close()
     con.close()
 
+@gen.engine
+def DonateMsg(owner, buyer):
+    import datetime
+    con = getConn()
+    cur = con.cursor()
+    user = getUserinfo(buyer)
+    now = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+    if user.has_key('user_name'):
+        title = u"你的朋友成功赠送福娃"
+        content = u"您于{1}收到 {0} 赠送的福娃".format(user['user_name'], now)
+        sql = u"insert into message (touser, type, nick, snap, title, content, state) values\
+('%s', 0, '%s', '%s', '%s', '%s', 0)" %(owner, user['user_name'], user['avatar'], title, content)
+        cur.execute(sql)
+        con.commit()
+
+    cur.close()
+    con.close()
 
 if __name__ ==  '__main__':
     import cjson

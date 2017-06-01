@@ -204,6 +204,23 @@ class CancelsellHandler(tornado.web.RequestHandler):
         resp['message'] = "OK" 
         self.write(cjson.encode(resp))
 
+class donateHandler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict()
+        owner = self.get_argument("owner", strip=True)
+        buyer = self.get_argument("buyer", strip=True)
+
+        if len(owner) < 2 or len(buyer) < 3:
+            resp['code'] =  2
+            resp['message'] = "Parameter Error" 
+            self.write(cjson.encode(resp))
+            return
+
+        mysql.DonateMsg(owner, buyer)
+        resp['code'] =  0
+        resp['message'] = "OK" 
+        self.write(cjson.encode(resp))
+
 application = tornado.web.Application([
     (r"/querysell", QuerysellHandler),
     (r"/querymysell", QuerymysellHandler),
@@ -214,6 +231,7 @@ application = tornado.web.Application([
     (r"/apply", applyHandler),
     (r"/money", moneyHandler),
     (r"/querymoney", querymoneyHandler),
+    (r"/donatemsg", donateHandler),
 ])
 
 if __name__ == "__main__":
