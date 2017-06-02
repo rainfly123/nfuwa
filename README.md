@@ -592,10 +592,10 @@ height:768
 }
 有序集合
 　美食　video_1 filemd5 播放次数
-　女装　video_2 filemd5  播放次数
-　男装　video_3 filemd5 播放次数
-　鞋帽　video_4 filemd5 播放次数
-　玩乐　video_5 filemd5 播放次数
+　服饰　video_2 filemd5  播放次数
+　生活　video_3 filemd5 播放次数
+　服务　video_4 filemd5 播放次数
+　综合　video_5 filemd5 播放次数
 
 盟友　　video_i filemd5 播放次数
 　
