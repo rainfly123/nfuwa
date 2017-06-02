@@ -520,11 +520,11 @@ http://fuwa.hmg66.com/api/queryclass
    code : 0
    message: "OK",
    data:[
-   {name:"美食", enum:"1"},
-   {name:"女装", enum:"2"},
-   {name:"男装", enum:"3"},
-   {name:"鞋帽", enum:"4"},
-   {name:"玩乐", enum:"5"},
+   {name:"美食", classid:"1"},
+   {name:"女装", classid:"2"},
+   {name:"男装", classid:"3"},
+   {name:"鞋帽", classid:"4"},
+   {name:"玩乐", classid:"5"},
    ]
 }
 ```
