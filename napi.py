@@ -329,6 +329,11 @@ class Capturev2Handler(tornado.web.RequestHandler):
             return
 
         data = redi.Capturev2Fuwa(user, gid)
+        if data == False:
+            resp['code'] =  3
+            resp['message'] = "明天再来吧"
+            self.write(json.dumps(resp))
+            return
 
         resp['code'] =  0
         resp['message'] = "Ok" 
