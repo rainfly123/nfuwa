@@ -501,6 +501,22 @@ class querystrvideoHandler(tornado.web.RequestHandler):
         resp['data'] = redi.QueryStrVideo(longitude, latitude)
         self.write(json.dumps(resp))
 
+class APPHandler(tornado.web.RequestHandler):
+    def get(self):
+        resp = dict()
+        geohash = self.get_argument("geohash", strip=True)
+        geo = geohash.split('-')
+        if len(geo) != 2:
+            resp['code'] =  1
+            resp['message'] = "Parameter Error"
+            self.write(json.dumps(resp))
+            return
+        longitude, latitude = geo[0], geo[1]
+        resp['code'] =  0
+        resp['message'] = "OK"
+        resp['data'] = redi.APP(longitude, latitude, 300)
+        self.write(json.dumps(resp))
+
 application = tornado.web.Application([
     (r"/queryv2", Queryv2Handler),
     (r"/querystrangerv2", QueryStrangerv2Handler),
@@ -524,6 +540,7 @@ application = tornado.web.Application([
     (r"/queryvideo", queryvideoHandler),
     (r"/querystrvideo", querystrvideoHandler),
     (r"/hit", hitHandler),
+    (r"/app", APPHandler),
 ])
 
 if __name__ == "__main__":

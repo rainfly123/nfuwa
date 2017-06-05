@@ -538,6 +538,27 @@ def QueryStrVideo(longtitude, latitude):
 
     return results
 
+def APP(longtitude, latitude, radius):
+    fuwas = r.georadius("fuwa_c", longtitude, latitude, int(radius), unit="m", withdist=True)
+    near = [x for x in fuwas if x[1] <= HOWFAR]
+    near = sorted(near, key=lambda x: int(x[0][7:]), reverse=True)
+    near = near[:100]
+    total = 1
+    nearfuwas = list()
+    for fuwa in near:
+        fuwaid = fuwa[0]
+        geohash = r.geopos("fuwa_c", fuwaid)
+        result = dict()
+        result['id'] = total
+        total += 1
+        result['longitude'] = geohash[0][0]
+        result['latitude'] = geohash[0][1]
+        result['width'] = 33
+        result['height'] = 40
+        result['iconPath'] = "/images/fuwa_local.png"
+        nearfuwas.append(result)
+
+    return {"far":[], "near":nearfuwas}
 
 #print QueryMyApply("100000076")
 #print QueryMy("100000320")
