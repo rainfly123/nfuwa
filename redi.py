@@ -554,7 +554,7 @@ def APP(longtitude, latitude, radius):
         result['longitude'] = geohash[0][0]
         result['latitude'] = geohash[0][1]
         result['width'] = 33
-        result['height'] = 40
+        result['height'] = 50
         result['iconPath'] = "/images/fuwa_local.png"
         nearfuwas.append(result)
 
