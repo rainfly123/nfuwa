@@ -337,7 +337,7 @@ sign  签名
 sign=md5(/donate?token=xx&fuwagid=xx&fromuser=xx&platform=boss66)
 
 # 13 申请福娃
-http://fuwa.hmg66.com/msg/apply?userid=xx&name=xxx&phone=zz&shop=1&purpose=店内活动&region=广州&number=100
+http://fuwa.hmg66.com/msg/apply?userid=&name=xxx&phone=zz&shop=1&purpose=店内活动&region=广州&number=100
 userid 用户ＩＤ
 name 联系人姓名或公司名
 phone 电话
