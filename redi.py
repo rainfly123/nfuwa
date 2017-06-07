@@ -255,7 +255,7 @@ def QueryStrFuwav3(longtitude, latitude, radius, biggest, creator):
 
 BASE = "https://api.66boss.com/ucenter/userinfo/info?user_id="
 def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, purpose,\
-               videogeo, filemd5):
+               videogeo, filemd5, classid):
 
     results = r.smembers(owner + "_apply")
     shufflefuwas = list(results)
@@ -273,7 +273,9 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
                 vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
                 r.hmset(filemd5, vdic) 
-            dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows}
+                r.hincrby(filemd5, "usedby", amount=number)
+            dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows, "filemd5": filemd5, \
+                  "classid": classid}
             r.hmset(fuwagid, dic) 
             r.srem(owner + "_apply", fuwagid)
             number -= 1
@@ -290,7 +292,9 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
                 vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
                 r.hmset(filemd5, vdic) 
-            dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows}
+                r.hincrby(filemd5, "usedby", amount=number)
+            dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows, "filemd5": filemd5, \
+                  "classid": classid}
             r.hmset(fuwagid, dic) 
             r.srem(owner + "_apply", fuwagid)
             number -= 1
@@ -335,6 +339,11 @@ def Capturev2Fuwa(user, gid):
     if val == 1 :
         r.hset(gid, "owner", user)
         r.sadd(user + "_pack", gid)
+        filemd5, classid = r.hmget(gid, "filemd5", "classid")
+        usedby = r.hincrby(filemd5, "usedby", amount=-1)
+        if usedby < 0:
+          r.zrem("video_g_" + classid, filemd5)
+          r.zrem("video_" + classid, filemd5)
         return True
     return False
 
