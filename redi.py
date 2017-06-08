@@ -466,8 +466,11 @@ def QueryVideo(classid, longtitude, latitude):
         dis = getdis.getdistance(location, (pos[1], pos[0]))
         distances.append(dis)
     results = list()
+    myresults = list()
     which = 0
     for filemd5 in filemd5s:
+        if myresults.count(filemd5) > 0:
+            continue
         temp = dict()
         name, gender, avatar, userid, video, width, height = \
         r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
@@ -481,11 +484,14 @@ def QueryVideo(classid, longtitude, latitude):
         temp['distance'] = distances[which]
         temp['filemd5'] = filemd5
         results.append(temp)
+        myresults.append(filemd5)
         which += 1 
 
     videos = r.georadius("video_g_"+classid, longtitude, latitude, 50000, unit="m", withdist=True, sort="ASC")
     for video in videos:
         filemd5, far = video[0], video[1]
+        if myresults.count(filemd5) > 0:
+            continue
         temp = dict()
         name, gender, avatar, userid, video, width, height = \
         r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
@@ -499,6 +505,7 @@ def QueryVideo(classid, longtitude, latitude):
         temp['distance'] = far
         temp['filemd5'] = filemd5
         results.append(temp)
+        myresults.append(filemd5)
 
     return results
 
@@ -511,8 +518,11 @@ def QueryStrVideo(longtitude, latitude):
         dis = getdis.getdistance(location, (pos[1], pos[0]))
         distances.append(dis)
     results = list()
+    myresults = list()
     which = 0
     for filemd5 in filemd5s:
+        if myresults.count(filemd5) > 0:
+            continue
         temp = dict()
         name, gender, avatar, userid, video, width, height = \
         r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
@@ -526,11 +536,14 @@ def QueryStrVideo(longtitude, latitude):
         temp['distance'] = distances[which]
         temp['filemd5'] = filemd5
         results.append(temp)
+        myresults.append(filemd5)
         which += 1 
 
     videos = r.georadius("video_g_i", longtitude, latitude, 50000, unit="m", withdist=True, sort="ASC")
     for video in videos:
         filemd5, far = video[0], video[1]
+        if myresults.count(filemd5) > 0:
+            continue
         temp = dict()
         name, gender, avatar, userid, video, width, height = \
         r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
@@ -544,6 +557,7 @@ def QueryStrVideo(longtitude, latitude):
         temp['distance'] = far
         temp['filemd5'] = filemd5
         results.append(temp)
+        myresults.append(filemd5)
 
     return results
 
