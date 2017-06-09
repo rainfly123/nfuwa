@@ -341,7 +341,7 @@ def Capturev2Fuwa(user, gid):
         r.sadd(user + "_pack", gid)
         filemd5, classid = r.hmget(gid, "filemd5", "classid")
         usedby = r.hincrby(filemd5, "usedby", amount=-1)
-        if usedby < 0:
+        if usedby <= 0:
           r.zrem("video_g_" + classid, filemd5)
           r.zrem("video_" + classid, filemd5)
         return True
