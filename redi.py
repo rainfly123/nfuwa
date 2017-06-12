@@ -448,7 +448,7 @@ def Huodong(gid):
     return detail
 
 aclass =[{"name":"美食", "classid":"1"}, {"name":"服饰", "classid":"2"}, {"name":"生活", "classid":"3"},\
-        {"name":"服务", "classid":"4"}, {"name":"综合", "classid":"5"}, {"name":"测试", "classid":"6"}]
+        {"name":"服务", "classid":"4"}, {"name":"综合", "classid":"5"}]
 
 def Class():
     return aclass
