@@ -271,7 +271,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
             if len(filemd5) > 5:
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
-                vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video, "usedby":number}
+                vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
                 r.hmset(filemd5, vdic) 
             dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows, "filemd5": filemd5, \
                   "classid": classid}
@@ -289,7 +289,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
             if len(filemd5) > 5:
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
-                vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video, "usedby":number}
+                vdic = {"name":name, "avatar":avatar, "gender":gender, "userid":owner, "video":video}
                 r.hmset(filemd5, vdic) 
             dic = {"pos": pos, "pic": pic, "detail": detail, "video": video, "htime": nows, "filemd5": filemd5, \
                   "classid": classid}
@@ -298,6 +298,8 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             number -= 1
             if number == 0 :
                 break
+    if len(filemd5) > 5:
+        r.hincrby(filemd5, "usedby", amount=number)
 
 def CaptureFuwa(pic, user, gid):
     import os
