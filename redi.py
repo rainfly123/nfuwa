@@ -262,6 +262,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
     random.shuffle(shufflefuwas)
 
     nows = str(int(time.time()))
+    nnumber = number
     if purpose == "1":
         for which in xrange(len(results)):
             fuwagid  = shufflefuwas[which]
@@ -299,7 +300,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if number == 0 :
                 break
     if len(filemd5) > 5:
-        r.hincrby(filemd5, "usedby", amount=number)
+        r.hincrby(filemd5, "usedby", amount=nnumber)
 
 def CaptureFuwa(pic, user, gid):
     import os
