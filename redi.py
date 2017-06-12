@@ -341,10 +341,11 @@ def Capturev2Fuwa(user, gid):
         r.hset(gid, "owner", user)
         r.sadd(user + "_pack", gid)
         filemd5, classid = r.hmget(gid, "filemd5", "classid")
-        usedby = r.hincrby(filemd5, "usedby", amount=-1)
-        if usedby <= 0:
-          r.zrem("video_g_" + classid, filemd5)
-          r.zrem("video_" + classid, filemd5)
+        if filemd5 != None:
+            usedby = r.hincrby(filemd5, "usedby", amount=-1)
+            if usedby <= 0:
+                r.zrem("video_g_" + classid, filemd5)
+                r.zrem("video_" + classid, filemd5)
         return True
     return False
 
@@ -461,6 +462,7 @@ def Hit(filemd5, classid):
 def QueryVideo(classid, longtitude, latitude):
     location = (latitude, longtitude)
     filemd5s = r.zrevrange("video_" + classid, 0, 9)
+    filemd5s = [x for x in filemd5s if x != None]
     positions = r.geopos("video_g_" + classid, *filemd5s)
     distances = list()
     for pos in positions:
@@ -513,6 +515,7 @@ def QueryVideo(classid, longtitude, latitude):
 def QueryStrVideo(longtitude, latitude):
     location = (latitude, longtitude)
     filemd5s = r.zrevrange("video_i", 0, 9)
+    filemd5s = [x for x in filemd5s if x != None]
     positions = r.geopos("video_g_i", *filemd5s)
     distances = list()
     for pos in positions:
