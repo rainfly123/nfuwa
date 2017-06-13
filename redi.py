@@ -456,7 +456,9 @@ def Class():
     return aclass
 
 def Hit(filemd5, classid):
-    r.zincrby("video_" + classid, filemd5, amount=1)
+    score = r.zscore("video_" + classid, filemd5)
+    if score != None:
+        r.zincrby("video_" + classid, filemd5, amount=1)
     return True
 
 def QueryVideo(classid, longtitude, latitude):
