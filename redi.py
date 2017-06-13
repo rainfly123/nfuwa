@@ -301,6 +301,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
                 break
     if len(filemd5) > 5:
         r.hincrby(filemd5, "usedby", amount=nnumber)
+        r.zadd("video_" + classid, filemd5, 0)
 
 def CaptureFuwa(pic, user, gid):
     import os
