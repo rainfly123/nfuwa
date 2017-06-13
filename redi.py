@@ -472,8 +472,9 @@ def QueryVideo(classid, longtitude, latitude):
     myresults = list()
     which = 0
     for filemd5 in filemd5s:
-        if myresults.count(filemd5) > 0:
-            continue
+        #this moment we can't see repeated
+        #if myresults.count(filemd5) > 0:
+        #    continue
         temp = dict()
         name, gender, avatar, userid, video, width, height = \
         r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
@@ -508,7 +509,7 @@ def QueryVideo(classid, longtitude, latitude):
         temp['distance'] = far
         temp['filemd5'] = filemd5
         results.append(temp)
-        myresults.append(filemd5)
+        #myresults.append(filemd5)
 
     return results
 
@@ -525,8 +526,9 @@ def QueryStrVideo(longtitude, latitude):
     myresults = list()
     which = 0
     for filemd5 in filemd5s:
-        if myresults.count(filemd5) > 0:
-            continue
+        #this moment we can't see repeated
+        #if myresults.count(filemd5) > 0:
+        #    continue
         temp = dict()
         name, gender, avatar, userid, video, width, height = \
         r.hmget(filemd5, "name", "gender", "avatar", "userid", "video", "width", "height")
@@ -561,7 +563,7 @@ def QueryStrVideo(longtitude, latitude):
         temp['distance'] = far
         temp['filemd5'] = filemd5
         results.append(temp)
-        myresults.append(filemd5)
+        #myresults.append(filemd5)
 
     return results
 
