@@ -491,7 +491,7 @@ def QueryVideo(classid, longtitude, latitude):
         myresults.append(filemd5)
         which += 1 
 
-    videos = r.georadius("video_g_"+classid, longtitude, latitude, 50000, unit="m", withdist=True, sort="ASC")
+    videos = r.georadius("video_g_"+classid, longtitude, latitude, 50000, unit="m", withdist=True, count=100, sort="ASC")
     for video in videos:
         filemd5, far = video[0], video[1]
         if myresults.count(filemd5) > 0:
@@ -545,7 +545,7 @@ def QueryStrVideo(longtitude, latitude):
         myresults.append(filemd5)
         which += 1 
 
-    videos = r.georadius("video_g_i", longtitude, latitude, 50000, unit="m", withdist=True, sort="ASC")
+    videos = r.georadius("video_g_i", longtitude, latitude, 50000, unit="m", withdist=True, count=100, sort="ASC")
     for video in videos:
         filemd5, far = video[0], video[1]
         if myresults.count(filemd5) > 0:
