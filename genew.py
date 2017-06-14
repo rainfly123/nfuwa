@@ -40,6 +40,7 @@ def gene(userid, info, total, shop):
         temp["id"] =  idd        
         temp["creator"] = userid
         temp["awarded"] = "0" 
+       # temp["pos"] = "广州大酒店"
         temp["name"] = info['name']
         temp["avatar"] = info['avatar']
         temp["gender"] = info['gender']
