@@ -464,8 +464,8 @@ def Hit(filemd5, classid):
 
 def QueryVideo(classid, longtitude, latitude):
     location = (latitude, longtitude)
-    filemd5s = r.zrevrange("video_" + classid, 0, 9)
-    filemd5s = [x for x in filemd5s if x != None]
+    filemd5s = r.zrevrange("video_" + classid, 0, 4)
+    #filemd5s = [x for x in filemd5s if x != None]
     positions = r.geopos("video_g_" + classid, *filemd5s)
     distances = list()
     for pos in positions:
@@ -494,7 +494,7 @@ def QueryVideo(classid, longtitude, latitude):
         myresults.append(filemd5)
         which += 1 
 
-    videos = r.georadius("video_g_"+classid, longtitude, latitude, 50000, unit="m", withdist=True, count=100, sort="ASC")
+    videos = r.georadius("video_g_"+classid, longtitude, latitude, 10000, unit="m", withdist=True, count=100, sort="ASC")
     for video in videos:
         filemd5, far = video[0], video[1]
         if myresults.count(filemd5) > 0:
@@ -518,8 +518,8 @@ def QueryVideo(classid, longtitude, latitude):
 
 def QueryStrVideo(longtitude, latitude):
     location = (latitude, longtitude)
-    filemd5s = r.zrevrange("video_i", 0, 9)
-    filemd5s = [x for x in filemd5s if x != None]
+    filemd5s = r.zrevrange("video_i", 0, 4)
+    #filemd5s = [x for x in filemd5s if x != None]
     positions = r.geopos("video_g_i", *filemd5s)
     distances = list()
     for pos in positions:
@@ -548,7 +548,7 @@ def QueryStrVideo(longtitude, latitude):
         myresults.append(filemd5)
         which += 1 
 
-    videos = r.georadius("video_g_i", longtitude, latitude, 50000, unit="m", withdist=True, count=100, sort="ASC")
+    videos = r.georadius("video_g_i", longtitude, latitude, 10000, unit="m", withdist=True, count=100, sort="ASC")
     for video in videos:
         filemd5, far = video[0], video[1]
         if myresults.count(filemd5) > 0:
