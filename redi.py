@@ -11,7 +11,7 @@ from tornado.httpclient import AsyncHTTPClient
 from tornado.httputil import url_concat
 
 STORE_PATH="/www/html/fuwa/"
-pool = redis.ConnectionPool(host='127.0.0.1', port=6379, db=1, password="aaa11bbb22")  
+pool = redis.ConnectionPool(host='127.0.0.1', port=6379, db=0, password="aaa11bbb22")  
 r = redis.Redis(connection_pool=pool)  
 
 HOWFAR = 300
