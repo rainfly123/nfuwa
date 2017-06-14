@@ -8,7 +8,7 @@ fi
 
 touch $pid
 
-    files=$(ls *.mp4 -t | head -10)
+    files=$(ls *.mp4 -t | head -30)
     for file in $files
         do
         jpg=${file%.*}.jpg
@@ -20,7 +20,7 @@ touch $pid
         fi
     done
     sleep 1
-    files=$(ls *.mov -t | head -10)
+    files=$(ls *.mov -t | head -30)
     for file in $files
         do
         jpg=${file%.*}.jpg
