@@ -269,6 +269,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if fuwagid.find('i') > 0:
                 continue
             r.geoadd("fuwa_c", longtitude, latitude, fuwagid)
+            r.geoadd("fuwa_c_"+owner, longtitude, latitude, fuwagid)
             name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
             if len(filemd5) > 5:
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
@@ -287,6 +288,7 @@ def HideFuwaNew(longtitude, latitude, pos, pic, owner, detail, video, number, pu
             if fuwagid.find('c') > 0:
                 continue
             r.geoadd("fuwa_i", longtitude, latitude, fuwagid)
+            r.geoadd("fuwa_i_"+owner, longtitude, latitude, fuwagid)
             name, avatar, gender = r.hmget(fuwagid, "name", "avatar", "gender")
             if len(filemd5) > 5:
                 r.geoadd(videogeo, longtitude, latitude, filemd5)
@@ -336,8 +338,10 @@ def Capturev2Fuwa(user, gid):
     val = 0
     if gid.find('c') > 0:
         val = r.zrem("fuwa_c", gid)
+        r.zrem("fuwa_c_"+creator, gid)
     else:
         val = r.zrem("fuwa_i", gid)
+        r.zrem("fuwa_i_"+creator, gid)
     if val == 1 :
         r.hset(gid, "owner", user)
         r.sadd(user + "_pack", gid)
