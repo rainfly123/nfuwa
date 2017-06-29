@@ -330,9 +330,14 @@ def CaptureFuwa(pic, user, gid):
 
 def Capturev2Fuwa(user, gid):
     ###limit captues number
+
+    limit = r.hincrby(user+"_lmt", "total", amount=1)
+    if limit  >= 10:
+        return False
+
     creator = r.hget(gid, "creator")
     limit = r.hincrby(user+"_lmt", creator, amount=1)
-    if limit  > 3:
+    if limit  >= 3:
         return False
 
     val = 0
