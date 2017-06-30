@@ -293,7 +293,6 @@ id是福娃编号
 amount 是售价
 fuwagid 是福娃全局标识
 sign 签名
-sign=md5(/sell?id=xx&owner=xx&amount=x&fuwagid=x&platform=boss66)
 
 # 10 支付系统通知购买成功 
 http://fuwa.hmg66.com/msg/notice?orderid=xx&buyer=x&fuwagid=x

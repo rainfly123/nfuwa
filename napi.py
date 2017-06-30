@@ -273,7 +273,7 @@ class CaptureHandler(tornado.web.RequestHandler):
             self.write(json.dumps(resp))
             return
         where = self.request.uri.find("&sign=") 
-        src = self.request.uri[:where] + "&platform=boss66"
+        src = self.request.uri[:where] + ""
         sign.update(src)
         signout = sign.hexdigest()
         if signin != signout:
@@ -319,7 +319,7 @@ class Capturev2Handler(tornado.web.RequestHandler):
             self.write(json.dumps(resp))
             return
         where = self.request.uri.find("&sign=") 
-        src = self.request.uri[:where] + "&platform=boss66"
+        src = self.request.uri[:where] + ""
         sign.update(src)
         signout = sign.hexdigest()
         if signin != signout:
@@ -371,7 +371,7 @@ class donateHandler(tornado.web.RequestHandler):
             self.write(json.dumps(resp))
             return
         where = self.request.uri.find("&sign=") 
-        src = self.request.uri[:where] + "&platform=boss66"
+        src = self.request.uri[:where] + ""
         sign.update(src)
         signout = sign.hexdigest()
         if signin != signout:
@@ -443,7 +443,7 @@ class hitHandler(tornado.web.RequestHandler):
             self.write(json.dumps(resp))
             return
         where = self.request.uri.find("&sign=")
-        src = self.request.uri[:where] + "&platform=boss66"
+        src = self.request.uri[:where] + ""
         sign.update(src)
         signout = sign.hexdigest()
         if signin != signout:
