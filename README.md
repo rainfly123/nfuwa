@@ -333,7 +333,7 @@ token = base64(接收福娃用户的id)
 fuwagid 要赠送的福娃全局标识
 fromuser 赠送人的用户id
 sign  签名
-sign=md5(/donate?token=xx&fuwagid=xx&fromuser=xx&platform=boss66)
+sign=md5(/donate?token=xx&fuwagid=xx&fromuser=xx&)
 
 # 13 申请福娃
 http://fuwa.hmg66.com/msg/apply?userid=&name=xxx&phone=zz&shop=1&purpose=店内活动&region=广州&number=100
@@ -368,7 +368,7 @@ userid 用户ID
 amount 体现金额
 alipay 支付宝帐号
 sign 签名
-md5(/money?userid=100000076&alipay=22233322x&amount=13&name=%E5%B0%8F%E5%95%8A&platform=boss66)
+md5(/money?userid=100000076&alipay=22233322x&amount=13&name=%E5%B0%8F%E5%95%8A&)
 
 # 17 查询可用余额
 http://fuwa.hmg66.com/msg/querymoney?userid=100000078
@@ -530,11 +530,11 @@ http://fuwa.hmg66.com/api/queryclass
 
 # 关于签名 
 只对抓福娃ＵＲＬ　签名，其余不要求
-每个url后面都有 sign=xxx 签名计算方法是对uri&platform=boss66 进行md5
+每个url后面都有 sign=xxx 签名计算方法是对uri& 进行md5
 uri 是这个地址串 不含sign=
 举个例子：
 http://localhost:1688/capture?user=john&gid=fuwa_6&sign=7ad54cafb52668e4264320c3145c6422
-md5(/capture?user=john&gid=fuwa_6&platform=boss66)
+md5(/capture?user=john&gid=fuwa_6&)
 结果：
 7ad54cafb52668e4264320c3145c6422
 
