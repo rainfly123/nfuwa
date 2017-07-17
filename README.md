@@ -25,6 +25,7 @@ detail: "测试",
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 1
 }
 {
 geo: "113.320937-23.185474",
@@ -40,6 +41,7 @@ detail: "测试",
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 0
 }
 
 ]
@@ -58,6 +60,7 @@ gid: "fuwa_i_2353", ##2353 递减分页每页最多１００个，请求提交�
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 1
 },
 
 pic: "http://wsim.66boss.com/fuwa/brciqydlwvmtnxz.jpg",
@@ -74,6 +77,7 @@ gid: "fuwa_i_2349",
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 1
 },
 
 ]
@@ -105,6 +109,7 @@ detail: "测试",
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 1
 }
 {
 geo: "113.320937-23.185474",
@@ -120,6 +125,7 @@ detail: "测试",
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 0
 }
 
 ]
@@ -138,6 +144,7 @@ gid: "fuwa_i_2353", ##2353 递减分页每页最多１００个，请求提交�
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 1
 },
 
 pic: "http://wsim.66boss.com/fuwa/brciqydlwvmtnxz.jpg",
@@ -154,6 +161,7 @@ gid: "fuwa_i_2349",
 avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
 signature: "",
 location: "广东 广州市"
+"redevlp": 1
 },
 
 ]
@@ -220,6 +228,16 @@ user=是userid
 {
  code: 0
  message: "OK"
+ [{name: "CHU",  推荐附近的人
+ gender: "女",
+ avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
+ signature: "",
+ location: "广东 广州市"},
+ {name: "CHU",
+ gender: "女",
+ avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
+ signature: "",
+ location: "广东 广州市"},]
 }
 {
  code: 1
@@ -247,6 +265,9 @@ type=1福娃，０缘分
 number 藏福娃数量 （不能多于可用福娃数量,仅申请的福娃可以藏）
 class 分类，美食、女装，男装，鞋帽，娱乐，用１，２，３，4，5
 如果type=0藏缘分福娃，那么class 设置成i
+redevlptype=1/0 随机红包，相同金额
+amount=11111111 一共多少钱，必须保证每个福娃不少于1分钱，
+如果amount=0则 是 无红包福娃，反之亦然
 
 ```
 图片为file 视频为video
