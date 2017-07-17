@@ -228,16 +228,7 @@ user=是userid
 {
  code: 0
  message: "OK"
- [{name: "CHU",  推荐附近的人
- gender: "女",
- avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
- signature: "",
- location: "广东 广州市"},
- {name: "CHU",
- gender: "女",
- avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
- signature: "",
- location: "广东 广州市"},]
+
 }
 {
  code: 1
@@ -277,7 +268,21 @@ amount=11111111 一共多少钱，必须保证每个福娃不少于1分钱，
     <input type='submit' value='submit'/>
     </form>
 ```
-
+ {
+message: "Ok",
+code: 0,
+data: {
+ [{name: "CHU",  推荐附近的人
+ gender: "女",
+ avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
+ signature: "",
+ location: "广东 广州市"},
+ {name: "CHU",
+ gender: "女",
+ avatar: "https://imgcdn.66boss.com/imagesu/avatar/20170515023034206335.jpeg",
+ signature: "",
+ location: "广东 广州市"},]
+}
 # 7 福娃详情
 http://fuwa.hmg66.com/api/querydetail?fuwagid=fuwa_i_110
 ###当用户停留在背包-福娃详情页面时，需要定时3秒请求接口，刷新
